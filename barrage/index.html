@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>弹幕</title>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<style type="text/css">
+		.screen{
+			height: 500px;
+			width: 100%;
+		}
+		.screenCt{
+			height: 100%;
+			width: 100%;
+			background: rgba(0,0,0,.5);
+			position: relative;
+			overflow: hidden;
+		}
+		.screenCt font{
+			position: absolute;
+			white-space: nowrap;
+		}
+	</style>
+</head>
+<body>
+<div>
+	<div class="screen">
+		<div class="screenCt">
+			
+		</div>
+		<div class="send">
+			<input id="tmct" type="text" name="">
+			<input class="dmBtn" type="button" name="" value="发送">
+		</div>
+	</div>
+	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+	<script type="text/javascript">
+		var fontCt = ''
+		$(".dmBtn").on("click",function(){
+			var valCt = $("#tmct").val();
+			var valLen = valCt.length;
+			if(valLen==0){
+				alert("请先输入文字");
+				return false
+			}else{
+				fontCt = "<font>"+valCt+"</font>"
+				$(".screenCt").append(fontCt)
+				function heiFont(){
+					var screenCtH =$(".screenCt").height()
+					var screenCtW =$(".screenCt").width()
+					var Num = Math.random()
+					var fontH = screenCtH*Num
+					var fontW = $(".screenCt font").last().width()
+					console.log(fontW)
+					$(".screenCt font").last().css({
+						top:fontH+"px",
+						right:- (fontW-5)+"px",
+					})
+					$(".screenCt font").last().animate({
+						right:screenCtW+"px"
+					},5000,function(){
+						$(this).remove()
+					})
+				}
+				heiFont()
+			}
+		})
+	</script>
+</div>
+</body>
+</html>
